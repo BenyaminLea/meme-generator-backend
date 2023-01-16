@@ -15,7 +15,7 @@ app.use(cors())
 app.use(express.json())
 
 app.get('/api/memes', async (request:Request, response:Response) => {
-    const { data } = await axios.get('https://api.imgflip.com/get_memes');
+    const data:ImgFlipApiMemes = await axios.get('https://api.imgflip.com/get_memes');
     return response.json(data);
 })
 
@@ -26,7 +26,7 @@ app.get('/api/cache', (request:Request, response:Response) => {
 
 app.post('/api/meme', async (request:Request, response:Response) => {
     const obj:MemePayload = {'template_id':request.body.template_id, 'username':process.env.IMGFLIP_USERNAME, 'password':process.env.IMGFLIP_PASSWORD, 'text0':request.body.text0, 'text1':request.body.text1}
-    const { data } = await axios.post('https://api.imgflip.com/caption_image', qs.stringify(obj));
+    const data:ImgFlipApiMeme = await axios.post('https://api.imgflip.com/caption_image', qs.stringify(obj));
     cache.push({'timestamp':Date.now(), 'url' : data.data.url})
     return response.json(data)
 })
@@ -41,4 +41,14 @@ type MemePayload = {
     password:String | undefined,
     text0:String,
     text1:String
+}
+
+type ImgFlipApiMeme = {
+    success:Boolean,
+    data:{url:String, page_url:String}
+}
+
+type ImgFlipApiMemes = {
+    success:Boolean,
+    data:{memes:Array<Object>}
 }
