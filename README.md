@@ -5,8 +5,8 @@ Back end for a meme generator
 You should have installed nodejs on your computer (https://nodejs.org/en/download/) and one of the following package manager : yarn or npm.
 
 ### Installation
-git clone the projet
-Open a terminal in the folder
+git clone the projet <br />
+Open a terminal in the folder <br />
 Install the dependencies : ```npm install (or yarn install)```
 
 ### Credentials
@@ -17,7 +17,7 @@ IMGFLIP_PASSWORD="my_password"
 ```
 
 ### Launch
-In the terminal, launch the server with the following command: ```npm run start (ou yarn run start)```
+In the terminal, launch the server with the following command: ```npm run start (ou yarn run start)```<br />
 The server is launched at the following address : http://localhost:5000
 
 ### Stop
