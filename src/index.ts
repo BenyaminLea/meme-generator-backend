@@ -3,6 +3,7 @@ import qs from 'qs'
 import axios from 'axios'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import { privateEncrypt } from 'crypto'
 
 const app:Application = express()
 const PORT:Number = 5000
@@ -16,8 +17,8 @@ app.use(express.json())
 
 // GET route to get a list of memes available via the Imgflip API
 app.get('/api/memes', async (request:Request, response:Response) => {
-    const data:ImgFlipApiMemes = await axios.get('https://api.imgflip.com/get_memes');
-    return response.json(data);
+    const res_axios:{data:ImgFlipApiMemes} = await axios.get('https://api.imgflip.com/get_memes');
+    return response.json(res_axios.data);
 })
 
 // GET route to get the list of past memes (order by creation_date DESC)
@@ -28,9 +29,9 @@ app.get('/api/cache', (request:Request, response:Response) => {
 // POST route to create a new meme
 app.post('/api/meme', async (request:Request, response:Response) => {
     const obj:MemePayload = {'template_id':request.body.template_id, 'username':process.env.IMGFLIP_USERNAME, 'password':process.env.IMGFLIP_PASSWORD, 'text0':request.body.text0, 'text1':request.body.text1}
-    const data:ImgFlipApiMeme = await axios.post('https://api.imgflip.com/caption_image', qs.stringify(obj));
-    cache.unshift({'creation_date':Date.now(), 'url' : data.data.url})
-    return response.json(data)
+    const res_axios:{data:ImgFlipApiMeme} = await axios.post('https://api.imgflip.com/caption_image', qs.stringify(obj));
+    cache.unshift({'creation_date':Date.now(), 'url' : res_axios.data.data.url})
+    return response.json(res_axios.data)
 })
 
 app.listen(PORT, ():void => {
