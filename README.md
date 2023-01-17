@@ -5,7 +5,7 @@ Back end for a meme generator
 You should have installed nodejs on your computer (https://nodejs.org/en/download/) and one of the following package manager : yarn or npm.
 
 ### Installation
-git clone the projet <br />
+git clone the project <br />
 Open a terminal in the folder <br />
 Install the dependencies : ```npm install (or yarn install)```
 
@@ -87,6 +87,6 @@ The API has 3 routes :
     }
     ```
 
- ### Note 
- The structure of the API could have been divided into different files and folders (controllers, routers, type for example) but it is a very simple api so I have decided to use only one index.ts file to contain all the code. 
+### Note 
+The structure of the API could have been divided into different files and folders (controllers, routers, type for example) but it is a very simple api so I have decided to use only one index.ts file to contain all the code. 
 
